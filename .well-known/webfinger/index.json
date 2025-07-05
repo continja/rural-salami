@@ -1,0 +1,24 @@
+{
+    "subject": "acct:chadgoode@opayq.social",
+    "aliases": [
+        "https://opayq.social/@chadgoode",
+        "https://opayq.social/users/chadgoode",
+        "chadgoode@opayq.social"
+    ],
+    "links": [
+        {
+            "rel": "http://webfinger.net/rel/profile-page",
+            "type": "text/html",
+            "href": "https://opayq.social/@chadgoode"
+        },
+        {
+            "rel": "self",
+            "type": "application/activity+json",
+            "href": "https://opayq.social/users/chadgoode"
+        },
+        {
+            "rel": "http://ostatus.org/schema/1.0/subscribe",
+            "template": "https://opayq.social/authorize_interaction?uri={uri}"
+        }
+    ]
+}

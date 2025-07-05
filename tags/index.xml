@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Lights On Granger Lane</title>
+    <link>https://lightsongranger.com/tags/</link>
+    <description>Recent content in Tags on Lights On Granger Lane</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2025 Chad M. Goode. All rights reserved.</copyright>
+    <lastBuildDate>Tue, 07 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lightsongranger.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Christmas</title>
+      <link>https://lightsongranger.com/tags/christmas/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/tags/christmas/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Halloween</title>
+      <link>https://lightsongranger.com/tags/halloween/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/tags/halloween/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Light Show</title>
+      <link>https://lightsongranger.com/tags/light-show/</link>
+      <pubDate>Tue, 05 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/tags/light-show/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HomeAssistant</title>
+      <link>https://lightsongranger.com/tags/homeassistant/</link>
+      <pubDate>Sat, 18 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/tags/homeassistant/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
