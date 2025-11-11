@@ -324,7 +324,7 @@
 <meta property="og:site_name" content="Lights On Granger Lane">
 <meta property="article:published_time" content="2025-11-11T00:00:00+00:00">
     <meta property="article:modified_time" content="2025-11-11T00:00:00+00:00">
-    <meta property="og:image" content="https://lightsongranger.com/images/banner-2025-halloween-light-show-1280x640.png">
+    <meta property="og:image" content="https://lightsongranger.com/images/banner-2025-thanksgiving-light-show-1280x640.png">
 <meta property="og:image:alt" content="2025 Thanksgiving Light Show">
 
 
@@ -334,7 +334,7 @@
 
 <meta name="twitter:title" content="2025 Thanksgiving Light Show">
 <meta name="twitter:description" content="Grab your broomstick and potion of choice…">
-<meta name="twitter:image" content="https://lightsongranger.com/images/banner-2025-halloween-light-show-1280x640.png">
+<meta name="twitter:image" content="https://lightsongranger.com/images/banner-2025-thanksgiving-light-show-1280x640.png">
 <meta name="twitter:image:alt" content="2025 Thanksgiving Light Show">
 
 
@@ -432,8 +432,8 @@
         {
           "@type": "ImageObject",
           "@id": "https://lightsongranger.com/posts/2025-thanksgiving-light-show/#/schema/image/2",
-          "url": "https://lightsongranger.com/images/banner-2025-halloween-light-show-1280x640.png",
-          "contentUrl": "https://lightsongranger.com/images/banner-2025-halloween-light-show-1280x640.png",
+          "url": "https://lightsongranger.com/images/banner-2025-thanksgiving-light-show-1280x640.png",
+          "contentUrl": "https://lightsongranger.com/images/banner-2025-thanksgiving-light-show-1280x640.png",
           "caption": "2025 Thanksgiving Light Show"
         }
       ]
@@ -667,7 +667,7 @@
             &bull;
         
         1&nbsp;min read &bull;
-        12&nbsp;words
+        59&nbsp;words
     </small>
 <div class="mt-3">
         <div class="d-none-dark">
@@ -951,21 +951,22 @@
 
 
 <img class="img-fluid rounded"
-        src="/images/banner-2025-halloween-light-show-2800x1200.png"
+        src="/images/banner-2025-thanksgiving-light-show-2800x1200.png"
         
         fetchpriority="high"
-        srcset="/images/banner-2025-halloween-light-show-576x247.webp 576w, /images/banner-2025-halloween-light-show-768x329.webp 768w, /images/banner-2025-halloween-light-show-992x425.webp 992w, /images/banner-2025-halloween-light-show-1200x514.webp 1200w, /images/banner-2025-halloween-light-show-1400x600.webp 1400w, /images/banner-2025-halloween-light-show-2800x1200.webp 2800w" sizes="100vw"
+        srcset="/images/banner-2025-thanksgiving-light-show-576x247.webp 576w, /images/banner-2025-thanksgiving-light-show-768x329.webp 768w, /images/banner-2025-thanksgiving-light-show-992x425.webp 992w, /images/banner-2025-thanksgiving-light-show-1200x514.webp 1200w, /images/banner-2025-thanksgiving-light-show-1400x600.webp 1400w, /images/banner-2025-thanksgiving-light-show-2800x1200.webp 2800w" sizes="100vw"
         height="1200"
         width="2800"
         alt="2025 Thanksgiving Light Show">
-    </div><p>Testing something.</p>
+    </div><p>Trying something new.</p>
+<p>If you see this, give it a shot. Just click on one of the following songs to play it instantly.</p>
 <ul>
 <li>
  
 
 
-<button id="btn-1" class="playlist-trigger-button">
-  > 1
+<button id="btn-1" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
 </button>
 
 <script>
@@ -999,13 +1000,13 @@
       console.error('Fetch error:', error);
     });
   });
-</script> Test Item #1</li>
+</script> <strong>Believer</strong> - Imagine Dragons</li>
 <li>
  
 
 
-<button id="btn-2" class="playlist-trigger-button">
-  > 2
+<button id="btn-2" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
 </button>
 
 <script>
@@ -1039,8 +1040,209 @@
       console.error('Fetch error:', error);
     });
   });
-</script> Test Item #2</li>
+</script> <strong>Can&rsquo;t Gobble Me</strong></li>
+<li>
+ 
+
+
+<button id="btn-3" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
+</button>
+
+<script>
+  
+  document.getElementById('btn-3').addEventListener('click', function() {
+    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+    const musicItemID = '3';
+
+    
+    const payload = {
+      action: "play_music",
+      item_id: musicItemID
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      
+      if (response.ok) {
+        console.log('Request sent successfully for:', musicItemID);
+      } else {
+        console.error('Request failed with status:', response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  });
+</script> <strong>Can&rsquo;t Stop the Feeling</strong></li>
+<li>
+ 
+
+
+<button id="btn-4" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
+</button>
+
+<script>
+  
+  document.getElementById('btn-4').addEventListener('click', function() {
+    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+    const musicItemID = '4';
+
+    
+    const payload = {
+      action: "play_music",
+      item_id: musicItemID
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      
+      if (response.ok) {
+        console.log('Request sent successfully for:', musicItemID);
+      } else {
+        console.error('Request failed with status:', response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  });
+</script> <strong>Circle of Life</strong> - Elton John (from the Lion King)</li>
+<li>
+ 
+
+
+<button id="btn-5" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
+</button>
+
+<script>
+  
+  document.getElementById('btn-5').addEventListener('click', function() {
+    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+    const musicItemID = '5';
+
+    
+    const payload = {
+      action: "play_music",
+      item_id: musicItemID
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      
+      if (response.ok) {
+        console.log('Request sent successfully for:', musicItemID);
+      } else {
+        console.error('Request failed with status:', response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  });
+</script> <strong>Don&rsquo;t Stop</strong> -</li>
+<li>
+ 
+
+
+<button id="btn-6" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
+</button>
+
+<script>
+  
+  document.getElementById('btn-6').addEventListener('click', function() {
+    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+    const musicItemID = '6';
+
+    
+    const payload = {
+      action: "play_music",
+      item_id: musicItemID
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      
+      if (response.ok) {
+        console.log('Request sent successfully for:', musicItemID);
+      } else {
+        console.error('Request failed with status:', response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  });
+</script> <strong>Gobble Gobble</strong></li>
+<li>
+ 
+
+
+<button id="btn-7" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
+  &#9654;
+</button>
+
+<script>
+  
+  document.getElementById('btn-7').addEventListener('click', function() {
+    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+    const musicItemID = '7';
+
+    
+    const payload = {
+      action: "play_music",
+      item_id: musicItemID
+    };
+
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => {
+      
+      if (response.ok) {
+        console.log('Request sent successfully for:', musicItemID);
+      } else {
+        console.error('Request failed with status:', response.status);
+      }
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+  });
+</script> <strong>Walk the Dinosaur</strong></li>
 </ul>
+
 
 
 <div class="row row-cols-2 mt-5 mb-3">
@@ -1271,7 +1473,7 @@
 
 
 
-<script src="/js/core.bundle.en.min.78814920f72e1471d077e903b49d508d53d424571e4ba3973aea3d2cc5339ada.js"integrity="sha256-eIFJIPcuFHHQd&#43;kDtJ1QjVPUJFceS6OXOuo9LMUzmto=" crossorigin="anonymous" async>
+<script src="/js/core.bundle.en.min.be2bb1b8a27866395297d971e69a590256d4669e1f15cbb678aec53aea984703.js"integrity="sha256-viuxuKJ4ZjlSl9lx5ppZAlbUZp4fFcu2eK7FOuqYRwM=" crossorigin="anonymous" async>
 </script>
 
      
