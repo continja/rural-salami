@@ -962,284 +962,655 @@
 <p>If you see this, give it a shot. Just click the PLAY button next to one of the following songs to play it instantly.</p>
 <ul>
 <li>
- 
+ 
 
 
 <button id="btn-1" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-1').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '1';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-1');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-1').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '1';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Believer</strong> - Imagine Dragons</li>
 <li>
- 
+ 
 
 
 <button id="btn-2" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-2').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '2';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-2');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-2').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '2';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Can&rsquo;t Gobble Me</strong> - <em>I have no idea</em></li>
 <li>
- 
+ 
 
 
 <button id="btn-3" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-3').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '3';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-3');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-3').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '3';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Can&rsquo;t Stop the Feeling</strong> - Justin Timberlake, Shellback, Max Martin (from <em>Trolls</em>)</li>
 <li>
- 
+ 
 
 
 <button id="btn-4" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-4').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '4';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-4');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-4').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '4';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Circle of Life</strong> - Elton John (from <em>The Lion King</em>)</li>
 <li>
- 
+ 
 
 
 <button id="btn-5" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-5').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '5';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-5');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-5').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '5';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Don&rsquo;t Stop</strong> - Fleetwood Mac</li>
 <li>
- 
+ 
 
 
 <button id="btn-6" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-6').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '6';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-6');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-6').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '6';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Gobble Gobble</strong> - Matthew West</li>
 <li>
- 
+ 
 
 
 <button id="btn-7" class="playlist-trigger-button" style="border: none; background: none; cursor: pointer;">
-  &#9654;
+  &#9654;
 </button>
 
 <script>
-  
-  document.getElementById('btn-7').addEventListener('click', function() {
-    const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
-    const musicItemID = '7';
-
     
-    const payload = {
-      action: "play_music",
-      item_id: musicItemID
-    };
+    function sendSongRequestWithLocation(musicItemID, endpoint) {
+        
+        if (!navigator.geolocation) {
+            alert("Geolocation not supported. Cannot verify presence.");
+            return;
+        }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    .then(response => {
-      
-      if (response.ok) {
-        console.log('Request sent successfully for:', musicItemID);
-      } else {
-        console.error('Request failed with status:', response.status);
-      }
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-  });
+        const button = document.getElementById('btn-7');
+        button.disabled = true;
+        button.innerHTML = '&#8987;'; 
+
+        
+        navigator.geolocation.getCurrentPosition(
+            
+            (position) => {
+                const userLat = position.coords.latitude;
+                const userLon = position.coords.longitude;
+                
+                const payload = {
+                    action: "play_music",
+                    item_id: musicItemID,
+                    user_lat: userLat,
+                    user_lon: userLon
+                };
+
+                
+                fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                })
+                
+                .then(response => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;'; 
+                    
+                    if (response.status === 403) {
+                        alert("Access Denied: You are too far from the show.");
+                    } else if (!response.ok) {
+                        console.error('Command failed with status:', response.status);
+                        alert(`Request failed. Status: ${response.status}`);
+                    } else {
+                        console.log('Request sent successfully for:', musicItemID);
+                        alert(`Success: Command sent!`);
+                    }
+                })
+                .catch(error => {
+                    button.disabled = false;
+                    button.innerHTML = '&#9654;';
+                    console.error('Fetch Error:', error);
+                    alert('Request failed. Check console for details.');
+                });
+            },
+            
+            (error) => {
+                button.disabled = false;
+                button.innerHTML = '&#9654;';
+                
+                
+                console.error(`Geolocation FAILED. Code: ${error.code}. Message: ${error.message}`);
+
+                if (error.code === 1) {
+                    alert("Location access denied. Please check your browser settings.");
+                } else if (error.code === 2) {
+                    alert("Location data unavailable (GPS issue).");
+                } else if (error.code === 3) {
+                    alert("Location attempt timed out. Try moving outside.");
+                } else {
+                    alert("Could not get your location. Check browser console for details.");
+                }
+            },
+            
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    }
+    
+    
+    document.getElementById('btn-7').addEventListener('click', function() {
+        const endpoint = 'https:\/\/log-playlist-proxy.p6cnvwsalsqx.workers.dev\/';
+        const musicItemID = '7';
+        sendSongRequestWithLocation(musicItemID, endpoint);
+    });
 </script> <strong>Walk the Dinosaur</strong> - Queen Latifah (from <em>Ice Age: Dawn of the Dinosaurs</em>)</li>
 </ul>
 
@@ -1473,7 +1844,7 @@
 
 
 
-<script src="/js/core.bundle.en.min.46202f6fb007a75b063a4dfef22cb3f18fe4a7917ea90140816fb6207fae47c1.js"integrity="sha256-RiAvb7AHp1sGOk3&#43;8iyz8Y/kp5F&#43;qQFAgW&#43;2IH&#43;uR8E=" crossorigin="anonymous" async>
+<script src="/js/core.bundle.en.min.e3cee661fcb75f22618fe73ba55570b47dd155a387af66270fd55a3d0f3a88ee.js"integrity="sha256-487mYfy3XyJhj&#43;c7pVVwtH3RVaOHr2YnD9VaPQ86iO4=" crossorigin="anonymous" async>
 </script>
 
      
