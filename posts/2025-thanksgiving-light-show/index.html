@@ -1030,17 +1030,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Believer</strong> - Imagine Dragons
     </span>
 </div>
-<div id="msg-1" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-1" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-1');
     const msgDiv = document.getElementById('msg-1');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1049,6 +1052,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1072,19 +1076,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1093,6 +1087,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1106,7 +1101,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1122,17 +1117,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Can&rsquo;t Gobble Me</strong> - <em>I have no idea</em>
     </span>
 </div>
-<div id="msg-2" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-2" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-2');
     const msgDiv = document.getElementById('msg-2');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1141,6 +1139,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1164,19 +1163,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1185,6 +1174,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1198,7 +1188,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1214,17 +1204,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Can&rsquo;t Stop the Feeling</strong> - Justin Timberlake, Shellback, Max Martin (from <em>Trolls</em>)
     </span>
 </div>
-<div id="msg-3" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-3" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-3');
     const msgDiv = document.getElementById('msg-3');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1233,6 +1226,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1256,19 +1250,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1277,6 +1261,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1290,7 +1275,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1306,17 +1291,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Circle of Life</strong> - Elton John (from <em>The Lion King</em>)
     </span>
 </div>
-<div id="msg-4" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-4" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-4');
     const msgDiv = document.getElementById('msg-4');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1325,6 +1313,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1348,19 +1337,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1369,6 +1348,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1382,7 +1362,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1398,17 +1378,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Don&rsquo;t Stop</strong> - Fleetwood Mac
     </span>
 </div>
-<div id="msg-5" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-5" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-5');
     const msgDiv = document.getElementById('msg-5');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1417,6 +1400,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1440,19 +1424,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1461,6 +1435,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1474,7 +1449,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1490,17 +1465,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Gobble Gobble</strong> - Matthew West
     </span>
 </div>
-<div id="msg-6" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-6" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-6');
     const msgDiv = document.getElementById('msg-6');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1509,6 +1487,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1532,19 +1511,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1553,6 +1522,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1566,7 +1536,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 
 
@@ -1582,17 +1552,20 @@
          font-size: 24px;
          padding: 25px 10px;
          border-radius: 8px;
-         line-height: 0;">
-         ▶
+         line-height: 0;
+    ">
+        &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
         <strong>Walk the Dinosaur</strong> - Queen Latifah (from <em>Ice Age: Dawn of the Dinosaurs</em>)
     </span>
 </div>
-<div id="msg-7" style="font-size: 14px; color: #333; margin-left: 34px; min-height: 18px;"></div>
+
+
+<div id="msg-7" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
 
 <script>
-(function() {
+document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-7');
     const msgDiv = document.getElementById('msg-7');
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
@@ -1601,6 +1574,7 @@
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
             msgDiv.textContent = "Geolocation not supported in this browser.";
+            msgDiv.style.color = "red";
             return;
         }
 
@@ -1624,19 +1598,9 @@
                 });
 
                 const text = await response.text();
+                msgDiv.textContent = text; 
+                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
 
-                if (response.status === 403) {
-                    msgDiv.textContent = "Access Denied: " + text;
-                    msgDiv.style.color = "red";
-                } else if (!response.ok) {
-                    msgDiv.textContent = "Request failed: " + response.status;
-                    msgDiv.style.color = "red";
-                    console.error(text);
-                } else {
-                    msgDiv.textContent = "Success: " + text;
-                    msgDiv.style.color = "green";
-                    console.log(text);
-                }
             } catch (err) {
                 msgDiv.textContent = "Fetch error. See console.";
                 msgDiv.style.color = "red";
@@ -1645,6 +1609,7 @@
                 button.disabled = false;
                 button.innerHTML = '▶';
             }
+
         }, function(error) {
             button.disabled = false;
             button.innerHTML = '▶';
@@ -1658,7 +1623,7 @@
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
-})();
+});
 </script>
 </p>
 
