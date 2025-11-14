@@ -1022,15 +1022,60 @@
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
+
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-1" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1039,26 +1084,50 @@
     </span>
 </div>
 
-
-<div id="msg-1" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-1');
-    const msgDiv = document.getElementById('msg-1');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '1';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1076,28 +1145,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1108,16 +1179,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-2" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1126,26 +1241,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-2" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-2');
-    const msgDiv = document.getElementById('msg-2');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '2';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1163,28 +1302,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1195,16 +1336,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-3" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1213,26 +1398,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-3" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-3');
-    const msgDiv = document.getElementById('msg-3');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '3';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1250,28 +1459,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1282,16 +1493,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-4" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1300,26 +1555,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-4" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-4');
-    const msgDiv = document.getElementById('msg-4');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '4';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1337,28 +1616,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1369,16 +1650,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-5" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1387,26 +1712,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-5" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-5');
-    const msgDiv = document.getElementById('msg-5');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '5';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1424,28 +1773,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1456,16 +1807,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-6" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1474,26 +1869,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-6" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-6');
-    const msgDiv = document.getElementById('msg-6');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '6';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1511,28 +1930,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
@@ -1543,16 +1964,60 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+<style>
+.toast-container {
+     
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;  
+}
+
+.toast-message {
+     
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    
+     
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+    pointer-events: auto;  
+    max-width: 90vw;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.toast-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast-message.error {
+    background-color: rgba(200, 0, 0, 0.85);  
+}
+
+.toast-message.success {
+    background-color: rgba(0, 150, 0, 0.85);  
+}
+</style>
+
+<div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
     <button id="btn-7" class="playlist-trigger-button" style="
-         border: none;
-         background: none; 
-         cursor: pointer;
-         font-size: 24px;
-         padding: 25px 10px;
-         border-radius: 8px;
-         line-height: 0;
+        border: none;
+        background: none; 
+        cursor: pointer;
+        font-size: 24px;
+        padding: 25px 10px;
+        border-radius: 8px;
+        line-height: 0;
     ">
         &#9654;
     </button>
@@ -1561,26 +2026,50 @@ document.addEventListener("DOMContentLoaded", function() {
     </span>
 </div>
 
-
-<div id="msg-7" style="margin-left: 34px; margin-top: 4px; font-size: 16px;"></div>
-
 <script>
+
+function showToast(message, isError = false) {
+    const container = document.querySelector('.toast-container');
+    const toast = document.createElement('div');
+    
+    
+    toast.textContent = message;
+    toast.classList.add('toast-message');
+    toast.classList.add(isError ? 'error' : 'success');
+    
+    container.appendChild(toast);
+
+    
+    void toast.offsetWidth;
+
+    
+    toast.classList.add('show');
+
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 500); 
+    }, 4000);
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     const button = document.getElementById('btn-7');
-    const msgDiv = document.getElementById('msg-7');
+    
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '7';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
-            msgDiv.textContent = "Geolocation not supported in this browser.";
-            msgDiv.style.color = "red";
+            showToast("Geolocation not supported in this browser.", true);
             return;
         }
 
         button.disabled = true;
         button.innerHTML = '⏳';
-        msgDiv.textContent = "";
 
         navigator.geolocation.getCurrentPosition(async function(position) {
             const payload = {
@@ -1598,34 +2087,35 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
 
                 const text = await response.text();
-                msgDiv.textContent = text; 
-                msgDiv.style.color = (response.status === 403 || !response.ok) ? "red" : "green";
+                
+                
+                const isError = (response.status === 403 || !response.ok);
+                showToast(text, isError);
 
             } catch (err) {
-                msgDiv.textContent = "Fetch error. See console.";
-                msgDiv.style.color = "red";
+                showToast("Fetch error. See console.", true);
                 console.error(err);
             } finally {
                 button.disabled = false;
-                button.innerHTML = '▶';
+                button.innerHTML = '&#9654;';
             }
 
         }, function(error) {
             button.disabled = false;
-            button.innerHTML = '▶';
-            msgDiv.style.color = "red";
+            button.innerHTML = '&#9654;';
+            
+            let message = "Unable to get location.";
             switch(error.code) {
-                case 1: msgDiv.textContent = "Location access denied."; break;
-                case 2: msgDiv.textContent = "Location unavailable."; break;
-                case 3: msgDiv.textContent = "Location request timed out."; break;
-                default: msgDiv.textContent = "Unable to get location.";
+                case 1: message = "Location access denied. Cannot verify proximity."; break;
+                case 2: message = "Location unavailable. Cannot verify proximity."; break;
+                case 3: message = "Location request timed out."; break;
             }
+            showToast(message, true); 
             console.error("Geolocation error:", error);
         }, { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 });
     });
 });
-</script>
-</p>
+</script></p>
 
 
 
