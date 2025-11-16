@@ -2996,7 +2996,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <div class="toast-container"></div>
 
 <div style="display: flex; align-items: center; margin-bottom: 10px;">
-    <button id="btn-" class="playlist-trigger-button" style="
+    <button id="btn-0" class="playlist-trigger-button" style="
         border: none;
         background: none; 
         cursor: pointer;
@@ -3043,10 +3043,10 @@ function showToast(message, isError = false) {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const button = document.getElementById('btn-');
+    const button = document.getElementById('btn-0');
     
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
-    const musicItemID = '';
+    const musicItemID = '0';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
