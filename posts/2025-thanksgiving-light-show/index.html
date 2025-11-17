@@ -667,7 +667,7 @@
             &bull;
         
         2&nbsp;min read &bull;
-        277&nbsp;words
+        263&nbsp;words
     </small>
 <div class="mt-3">
         <div class="d-none-dark">
@@ -2670,7 +2670,7 @@ document.addEventListener("DOMContentLoaded", function() {
         &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
-        <strong>10. The Greatest Show</strong> - Hugh Jackman and Cast (from <em>The Greatest Showman</em>)
+        <strong>10. Walk the Dinosaur</strong> - Queen Latifah (from <em>Ice Age: Dawn of the Dinosaurs</em>)
     </span>
 </div>
 
@@ -2827,7 +2827,7 @@ document.addEventListener("DOMContentLoaded", function() {
         &#9654;
     </button>
     <span style="font-size: 20px; margin-left: 10px;">
-        <strong>11. Walk the Dinosaur</strong> - Queen Latifah (from <em>Ice Age: Dawn of the Dinosaurs</em>)
+        <strong>11. Zero</strong> - Imagine Dragons (from <em>Ralph Breaks the Internet</em>)
     </span>
 </div>
 
@@ -2866,163 +2866,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const endpoint = 'https:\/\/api.lightsongranger.com\/';
     const musicItemID = '11';
-
-    button.addEventListener('click', function() {
-        if (!navigator.geolocation) {
-            showToast("Geolocation not supported in this browser.", true);
-            return;
-        }
-
-        button.disabled = true;
-        button.innerHTML = '⏳';
-
-        navigator.geolocation.getCurrentPosition(async function(position) {
-            const payload = {
-                action: "play_music",
-                item_id: musicItemID,
-                user_lat: position.coords.latitude,
-                user_lon: position.coords.longitude
-            };
-
-            try {
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const text = await response.text();
-                
-                
-                const isError = (response.status === 403 || !response.ok);
-                showToast(text, isError);
-
-            } catch (err) {
-                showToast("Fetch error. See console.", true);
-                console.error(err);
-            } finally {
-                button.disabled = false;
-                button.innerHTML = '&#9654;';
-            }
-
-        }, function(error) {
-            button.disabled = false;
-            button.innerHTML = '&#9654;';
-            
-            let message = "Unable to get location.";
-            switch(error.code) {
-                case 1: message = "Location access denied. Cannot verify proximity."; break;
-                case 2: message = "Location unavailable. Cannot verify proximity."; break;
-                case 3: message = "Location request timed out."; break;
-            }
-            showToast(message, true); 
-            console.error("Geolocation error:", error);
-        }, { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 });
-    });
-});
-</script>
-
-
-
-
-
-<style>
-.toast-container {
-     
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    pointer-events: none;  
-}
-
-.toast-message {
-     
-    padding: 10px 20px;
-    border-radius: 6px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.75);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    
-     
-    opacity: 0;
-    transition: opacity 0.5s, transform 0.5s;
-    transform: translateY(20px);
-    pointer-events: auto;  
-    max-width: 90vw;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.toast-message.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.toast-message.error {
-    background-color: rgba(200, 0, 0, 0.85);  
-}
-
-.toast-message.success {
-    background-color: rgba(0, 150, 0, 0.85);  
-}
-</style>
-
-<div class="toast-container"></div>
-
-<div style="display: flex; align-items: center; margin-bottom: 10px;">
-    <button id="btn-12" class="playlist-trigger-button" style="
-        border: none;
-        background: none; 
-        cursor: pointer;
-        font-size: 24px;
-        padding: 25px 10px;
-        border-radius: 8px;
-        line-height: 0;
-    ">
-        &#9654;
-    </button>
-    <span style="font-size: 20px; margin-left: 10px;">
-        <strong>12. Zero</strong> - Imagine Dragons (from <em>Ralph Breaks the Internet</em>)
-    </span>
-</div>
-
-<script>
-
-function showToast(message, isError = false) {
-    const container = document.querySelector('.toast-container');
-    const toast = document.createElement('div');
-    
-    
-    toast.textContent = message;
-    toast.classList.add('toast-message');
-    toast.classList.add(isError ? 'error' : 'success');
-    
-    container.appendChild(toast);
-
-    
-    void toast.offsetWidth;
-
-    
-    toast.classList.add('show');
-
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-        
-        setTimeout(() => {
-            toast.remove();
-        }, 500); 
-    }, 5000);
-}
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const button = document.getElementById('btn-12');
-    
-    const endpoint = 'https:\/\/api.lightsongranger.com\/';
-    const musicItemID = '12';
 
     button.addEventListener('click', function() {
         if (!navigator.geolocation) {
