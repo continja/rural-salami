@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>10_shows on Lights On Granger Lane</title>
+    <link>https://lightsongranger.com/10_shows/</link>
+    <description>Recent content in 10_shows on Lights On Granger Lane</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <copyright>Copyright © 2025 Lights on Granger. All rights reserved.</copyright>
+    <lastBuildDate>Sat, 01 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://lightsongranger.com/10_shows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2025 Halloween Light Show</title>
+      <link>https://lightsongranger.com/10_shows/2025-halloween-light-show/</link>
+      <pubDate>Thu, 18 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/10_shows/2025-halloween-light-show/</guid>
+      <description>Grab your broomstick and potion of choice&amp;hellip;</description>
+    </item>
+  </channel>
+</rss>
