@@ -7,14 +7,21 @@
     <generator>Hugo</generator>
     <language>en-us</language>
     <copyright>Copyright © 2025 Lights on Granger. All rights reserved.</copyright>
-    <lastBuildDate>Sat, 22 Nov 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Nov 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://lightsongranger.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>The On-Demand Light Show</title>
+      <title>Light Show On-Demand via SMS/Text</title>
+      <link>https://lightsongranger.com/posts/2025-11-23-light-show-on-demand-with-sms/</link>
+      <pubDate>Sun, 23 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://lightsongranger.com/posts/2025-11-23-light-show-on-demand-with-sms/</guid>
+      <description>How I made my light show &amp;lsquo;On-Demand&amp;rsquo; using SMS/Text</description>
+    </item>
+    <item>
+      <title>Light Show On-Demand via the Web</title>
       <link>https://lightsongranger.com/posts/2025-11-22-the-on-demand-light-show/</link>
       <pubDate>Sat, 22 Nov 2025 00:00:00 +0000</pubDate>
       <guid>https://lightsongranger.com/posts/2025-11-22-the-on-demand-light-show/</guid>
-      <description>How I made my light show &amp;lsquo;On-Demand&amp;rsquo;</description>
+      <description>How I made my light show &amp;lsquo;On-Demand&amp;rsquo; from a web page</description>
     </item>
   </channel>
 </rss>
