@@ -1,0 +1,94 @@
+---
+title: "Lights on Granger"
+description: "Welcome to our annual holiday music and light show!"
+sections: ["shows", "posts"]
+content_blocks:
+
+  # Hero block
+  - _bookshop_name: hero
+    heading:
+      title: Lights on Granger
+      content: Welcome to our annual holiday music and light show!
+      width: 6
+    background:
+      color: body-tertiary
+      subtle: true
+    illustration:
+      image: /images/lights-on-granger.png
+      ratio: 16x9
+    width: 12
+    orientation: horizontal
+
+  # Content block
+  - _bookshop_name: panels
+    heading:
+      title: ""
+      content: |
+        ## 2025 Thanksgiving Light Show Schedule
+
+        * **When:** Now through Thanksgiving Day (The full **Christmas Show** goes live **Friday, Nov 28**)
+        * **Where:** 2303 Granger Ln, Cedar Park, TX 78613
+    elements:
+      - title: ""
+        content: ""
+
+  
+  # Articles block
+  - _bookshop_name: articles
+    heading:
+      title: Shows
+      align: start
+    input:
+      section: shows
+      reverse: true
+      sort: title
+    hide-empty: true
+    limit: 3
+
+
+---
+
+## 2025 Thanksgiving Light Show Schedule
+
+* **When:** Now through Thanksgiving Day (The full **Christmas Show** goes live **Friday, Nov 28**)
+* **Where:** 2303 Granger Ln, Cedar Park, TX 78613
+
+## On-Demand
+
+{{< alert color="success" >}}
+**Testing a New Feature:** Want to play a specific song? Give it a try here -> **[Thanksgiving 2025 Show](https://lightsongranger.com/shows/2025-thanksgiving-light-show/)**.
+{{< /alert >}}
+
+### Hours
+
+* **Sun - Thu:** Sunset to 9:30pm
+* **Fri - Sat:** Sunset to 11:00pm
+
+{{< alert color="warning" >}}
+**Service Availability:** On-demand is active **only** when you see the number displayed on the garage. If you don't see it, the feature is off (outside of show hours or due to maintenance).
+{{< /alert >}}
+
+### Details: How to Play On-Demand
+
+The show plays **ON-DEMAND** and controlled by you!
+
+1. Tune your radio to **87.9FM**.
+2. Text **go** to the number displayed on the garage.
+
+Once triggered, the show starts a new session with a unique, randomized playlist and plays the first set of songs.
+
+* **For the next set:** Text **go** again.
+* **Variety Guaranteed:** Because the show plays in short sets and randomizes the playlist for each new session, you won't see repeat songs, and you can enjoy as much as you like!
+* **Playlist Reset**: If the show isn't triggered for ~10 minutes, the session automatically resets for the next visitor.
+
+For more control, like playing specific songs, check out the [full 2025 Thanksgiving Show Page](https://lightsongranger.com/shows/2025-thanksgiving-light-show/).
+
+
+<!---
+Running from late September through early January, *Lights on Granger* is a free, family-friendly event that transforms our home into a synchronized spectacle of lights, music, and seasonal cheer. 
+
+We'll post showtimes and updates as the season approaches.
+
+In the meantime, scroll down to enjoy videos from past years' shows.
+--->
+
