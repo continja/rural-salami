@@ -5,7 +5,7 @@
 
 <!doctype html>
 <html lang="en" class="no-js">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script>
+    <head>
 
 <script src="/js/critical.bundle.min.8b80676a41018c1e1644d9ccdbb34f113985d369ab293c4f465d58780bc16a3a.js"
          integrity="sha256-i4BnakEBjB4WRNnM27NPETmF02mrKTxPRl1YeAvBajo=" crossorigin="anonymous"></script><meta charset="utf-8">
@@ -928,11 +928,6 @@
                 
 
 
-<div class="img-wrap mb-5"><img class="img-fluid rounded"
-            src="/images/banner-2025-11-22-on-demand-light-show-2800x1200.png"
-             fetchpriority="high" srcset="/images/banner-2025-11-22-on-demand-light-show-576x247.webp 576w, /images/banner-2025-11-22-on-demand-light-show-768x329.webp 768w, /images/banner-2025-11-22-on-demand-light-show-992x425.webp 992w, /images/banner-2025-11-22-on-demand-light-show-1200x514.webp 1200w, /images/banner-2025-11-22-on-demand-light-show-1400x600.webp 1400w, /images/banner-2025-11-22-on-demand-light-show-2800x1200.webp 2800w" sizes="100vw" height="1200" width="2800" alt="Light Show On-Demand via the Web"></div>
-
-
 
 
 <h2 id="background" class="heading ">Background<a href="#background" aria-labelledby="background">
@@ -1682,7 +1677,6 @@ function showToast(message, isError = false) {
     <a href="/shows/2025-thanksgiving-light-show/">2025 Thanksgiving Light Show</a>. However, since I didn&rsquo;t build in any determination of what season/show/playlist it should play from, I&rsquo;ll move this functionality to the Christmas Show page when it goes live. After Christmas, I&rsquo;ll disable it until next season. Also, since you&rsquo;re likely not standing in front of my house, all you&rsquo;re going to see are the pop-up toast messages stating you&rsquo;re out of range.</p>
 <p>The above is a simplified version of my implementation. I retained the SMS/Text functionality, which is set up to construct the same payload from an SMS/text message as received from the web. I then inject both payloads, regardless of source, into the same business logic flow, apply the same tests, respond with the same messages and route to the next actions (play single, play random, etc).</p>
 <p>I hope this has been helpful to someone, or at least interesting.</p>
-
 
                 
                 
