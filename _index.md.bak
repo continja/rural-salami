@@ -1,26 +1,99 @@
 ---
 title: "Lights on Granger"
 description: "Welcome to our annual holiday music and light show!"
+sections: ["shows", "posts"]
+thumbnail: "/images/lights-on-granger.png"
+
 content_blocks:
+
+  # Hero block
   - _bookshop_name: hero
     heading:
-      title: Welcome to Hinode!
-      content: |-
-        A clean documentation and blog theme for your Hugo site based on Bootstrap 5.
+      title: Lights on Granger
+      content: Welcome to our annual holiday music and light show!
       width: 6
     background:
-      color: primary
+      color: body-tertiary
       subtle: true
     illustration:
-      image: /img/sunrise.jpg
+      image: /images/lights-on-granger.png
       ratio: 16x9
-    width: 8
-    links:
-      - title: Getting started
-        url: https://gethinode.com/docs
-        icon: fas chevron-right
+    width: 12
     orientation: horizontal
-    justify: center
+
+  # About block
+  - _bookshop_name: about
+    heading:
+      title: 2025 Holiday Light Show Schedule
+      align: start
+      width: 8
+      size: 6
+      content: |
+        * **When:** Now through Sun, December 28. 
+        * **Where:** 2303 Granger Ln, Cedar Park, TX 78613
+
+        ## On-Demand
+
+        ### Hours
+
+        * **Sun - Thu:** Sunset to 9:30pm
+        * **Fri - Sat:** Sunset to 11:00pm
+        <p class="alert alert-warning" role="alert">
+        <strong>Service Availability:</strong> On-demand is active <strong>only</strong> when you see the number displayed on the garage. If you don't see it, the feature is off (outside of show hours or due to maintenance).</strong>
+        </p>
+
+        ### Details: How to Play On-Demand
+
+        The show plays **ON-DEMAND** and controlled by you!
+
+        <p class="alert alert-success" role="alert">
+        Want to play a specific song? Give it a try here -> <strong><a href="/shows/2025-christmas-light-show/">Christmas 2025 Show</a></strong>.
+        </p>
+
+        1. Tune your radio to **87.9FM**.
+        2. Text **go** to the number displayed on the garage.
+
+        Once triggered, the show starts a new session with a unique, randomized playlist and plays the first set of songs.
+
+        * **For the next set:** Text **go** again.
+        * **Variety Guaranteed:** Because the show plays in short sets and randomizes the playlist for each new session, you won't see repeat songs, and you can enjoy as much as you like!
+        * **Playlist Reset**: If the show isn't triggered for ~10 minutes, the session automatically resets for the next visitor.
+
+        For more control, like playing specific songs, check out the [full 2025 Christmas Show Page](/shows/2025-christmas-light-show/).
+
+  # Separator block
+  - _bookshop_name: separator 
+       
+  # Articles block
+  - _bookshop_name: articles
+    heading:
+      title: Shows
+      align: start
+    input:
+      section: shows
+      reverse: true
+      sort: date
+    hide-empty: true
+    limit: 3
+  # Articles block
+  - _bookshop_name: articles
+    heading:
+      title: Posts
+      align: date
+    input:
+      section: posts
+      reverse: true
+      sort: date
+    hide-empty: true
+    limit: 3
+
 ---
 
-test 12
+<!---
+Running from late September through early January, *Lights on Granger* is a free, family-friendly event that transforms our home into a synchronized spectacle of lights, music, and seasonal cheer. 
+
+We'll post showtimes and updates as the season approaches.
+
+In the meantime, scroll down to enjoy videos from past years' shows.
+--->
+
